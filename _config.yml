@@ -98,3 +98,11 @@ google_analytics_tracking_id:
 
 # Facebook Like
 facebook_like: false
+
+# --------- #
+#   Glynn   #
+# --------- #
+
+ftp_host: ftp.cluster015.ovh.net
+ftp_dir: /www/_blog
+ftp_passive: false
