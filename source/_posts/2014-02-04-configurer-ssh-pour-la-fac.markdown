@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Configurer SSH pour la fac"
-date: 2014-02-04 19:36:16 +0100
+date: 2014-02-04 22:36:16 +0100
 author: Baptiste Fontaine
 comments: true
 published: false
@@ -28,8 +28,8 @@ commande suivante :
 
     ssh dupont@nivose.informatique.univ-paris-diderot.fr
 
-Avec en prime le fait de devoir la phrase de passe de la clef à chaque fois. On
-peut faire mieux.
+C’est long, et avec en prime le fait de devoir la phrase de passe de la clef à
+chaque fois. On peut faire mieux.
 
 <!-- more -->
 
@@ -80,7 +80,11 @@ Host lucien lu
 ```
 
 Et ainsi de suite. Le champ `Hostname` peut bien entendu contenir une adresse
-IP à la place d’un nom de domaine.
+IP à la place d’un nom de domaine. Vous pouvez maintenant utiliser un de vos
+alias à la place du nom du serveur.
+
+Pensez à utiliser un alias à chaque fois que vous devez utiliser régulièrement
+un long nom de domaine ou une IP fixe impossible à retenir.
 
 ## Éviter de taper son mot de passe
 
@@ -90,5 +94,37 @@ votre machine locale :
 
     ssh-copy-id -i ~/.ssh/id_rsa.pub nivose
 
-TODO
+Exécutez la même commande pour chaque serveur. Votre mot de passe vous sera
+demandé, mais essayez ensuite de vous connecter avec `ssh`, et vous serez
+connecté directement sans avoir entré de mot de passe.
 
+## Tunnels SSH
+
+Il arrive parfois que le serveur qui permet d’accéder aux emplois du temps et
+aux notes en ligne ne soit pas accessible de l’extérieur. C’est le cas
+actuellement (4 février 2014). La solution est de passer via `lucien` pour être
+ainsi *dans* dans la fac et accéder à la page Web. On peut utiliser un
+navigateur textuel dans la session SSH, utiliser l’option `-X` de `ssh` puis
+lancer Firefox ou équivalent mais il y a plus simple : les tunnels SSH.
+
+La syntaxe est la suivante :
+
+    ssh -N <hostname SSH> -L <port local>:<hostname cible>:<port cible>
+
+Ici, on souhaite accéder à `magma.informatique.univ-paris-diderot.fr`, port
+`2201`, en passant par `lucien`. En supposant que vous avez les mêmes alias que
+moi, ça donne ça :
+
+    ssh -N lu -L 2201:magma.informatique.univ-paris-diderot.fr:2201
+
+Il suffit maintenant d’ouvrir votre navigateur à l’adresse `localhost:2201`. Le
+navigateur se connecte donc en local au port `2201` (le premier `2201` de la
+commande ci-dessus, vous pouvez changer le numéro de port si vous préférez), et
+via un tunnel SSH via `lucien` (dont un des alias donné en exemple plus haut
+est `lu`) se connecte à `magma.…` sur le port `2201` (le second `2201` de la
+commande). Vous pouvez maintenant accéder à votre emploi du temps et vos notes
+comme si vous étiez sur une machine de l’UFR. Remplacez simplement `magma.….fr`
+dans toutes les URL par `localhost`.
+
+Une fois votre consultation terminée vous pouvez fermer le tunnel avec un bon
+vieux `^C`.
