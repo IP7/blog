@@ -25,6 +25,9 @@ email:
 #    Jekyll & Plugins     #
 # ----------------------- #
 
+# used in templates
+lang: fr
+
 # If publishing to a subdirectory as in http://site.com/project set 'root: /project'
 root: /
 permalink: /:year/:month/:day/:title/

@@ -1,3 +1,4 @@
+# this file has been modified to get French dates (#1)
 require 'r18n-core'
 R18n.set('fr')
 include R18n::Helpers
@@ -13,26 +14,19 @@ module Octopress
       date
     end
 
-    # Returns an ordidinal date eg July 22 2007 -> July 22nd 2007
+    # Returns an ordinal date eg July 22 2007 -> July 22nd 2007
     def ordinalize(date)
       date = datetime(date)
-      "#{l date.strftime('%b')} #{ordinal(date.strftime('%e').to_i)}, #{l date.strftime('%Y')}"
-    end
-
-    # Returns an ordinal number. 13 -> 13th, 21 -> 21st etc.
-    def ordinal(number)
-      "#{number}<span>#{number.to_i == 1 ? "ier" : "e" }</span>"
+      "#{date.strftime('%e').to_i} #{l date.strftime('%B')} #{l date.strftime('%Y')}"
     end
 
     # Formats date either as ordinal or by given date format
-    # Adds %o as ordinal representation of the day
     def format_date(date, format)
       date = datetime(date)
       if format.nil? || format.empty? || format == "ordinal"
         date_formatted = ordinalize(date)
       else
         date_formatted = l date.strftime(format)
-        date_formatted.gsub!(/%o/, ordinal(date.strftime('%e').to_i))
       end
       date_formatted
     end
