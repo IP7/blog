@@ -186,9 +186,9 @@ ERR
     #
     # Returns string
     def date_to_html_string(date)
-      result = '<span class="month">' + l(date.strftime('%B')).upcase + '</span> '
-      result += l date.strftime('<span class="day">%d</span> ')
-      result += l date.strftime('<span class="year">%Y</span> ')
+      result = l date.strftime('<span class="day">%d</span> ')
+      result += ' <span class="month">' + l(date.strftime('%B')).upcase + '</span>'
+      result += ' ' + ldate.strftime('<span class="year">%Y</span>')
       result
     end
 

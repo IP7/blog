@@ -1,8 +1,11 @@
 {% capture category %}{{ post.categories | size }}{% endcapture %}
 <h1><a href="{{ root_url }}{{ post.url }}">{% if site.titlecase %}{{ post.title | titlecase }}{% else %}{{ post.title }}{% endif %}</a></h1>
-<time datetime="{{ post.date | datetime | date_to_xmlschema }}" pubdate>{{ post.date | date: "<span class='month'>%b</span> <span class='day'>%d</span> <span class='year'>%Y</span>"}}</time>
+{% comment %}
+ugly hack below to get French months (#1)
+{% endcomment %}
+<time datetime="{{ post.date | datetime | date_to_xmlschema }}" pubdate>{{ post.date | date: "<span class='day'>%d</span> <span class='month'>%b</span> <span class='year'>%Y</span>" | replace:'Feb','Fév' | replace:'Apr','Avr' | replace:'May','Mai' | replace:'Jun','Juin' | replace:'Jul','Juil' | replace:'Aug','Août' }}</time>
 {% if category != '0' %}
 <footer>
-  <span class="categories">posted in {{ post.categories | category_links }}</span>
+  <span class="categories">posté dans {{ post.categories | category_links }}</span>
 </footer>
 {% endif %}

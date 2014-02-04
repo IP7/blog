@@ -57,6 +57,10 @@ module Jekyll
     def to_liquid
       super_to_liquid.deep_merge(liquid_date_attributes)
     end
+
+    def date_dmy_html
+      "foo"
+    end
   end
 
   class Page
