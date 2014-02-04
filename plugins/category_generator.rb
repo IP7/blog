@@ -19,7 +19,11 @@
 # - category_title_prefix: The string used before the category name in the page title (default is
 #                          'Category: ').
 
+require 'r18n-core'
 require 'stringex'
+
+R18n.set('fr')
+include R18n::Helpers
 
 module Jekyll
 
@@ -182,9 +186,9 @@ ERR
     #
     # Returns string
     def date_to_html_string(date)
-      result = '<span class="month">' + date.strftime('%b').upcase + '</span> '
-      result += date.strftime('<span class="day">%d</span> ')
-      result += date.strftime('<span class="year">%Y</span> ')
+      result = '<span class="month">' + l(date.strftime('%b').upcase) + '</span> '
+      result += l date.strftime('<span class="day">%d</span> ')
+      result += l date.strftime('<span class="year">%Y</span> ')
       result
     end
 

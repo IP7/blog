@@ -1,3 +1,7 @@
+require 'r18n-core'
+R18n.set('fr')
+include R18n::Helpers
+
 module Octopress
   module Date
 
@@ -12,21 +16,12 @@ module Octopress
     # Returns an ordidinal date eg July 22 2007 -> July 22nd 2007
     def ordinalize(date)
       date = datetime(date)
-      "#{date.strftime('%b')} #{ordinal(date.strftime('%e').to_i)}, #{date.strftime('%Y')}"
+      "#{l date.strftime('%b')} #{ordinal(date.strftime('%e').to_i)}, #{l date.strftime('%Y')}"
     end
 
     # Returns an ordinal number. 13 -> 13th, 21 -> 21st etc.
     def ordinal(number)
-      if (11..13).include?(number.to_i % 100)
-        "#{number}<span>th</span>"
-      else
-        case number.to_i % 10
-        when 1; "#{number}<span>st</span>"
-        when 2; "#{number}<span>nd</span>"
-        when 3; "#{number}<span>rd</span>"
-        else    "#{number}<span>th</span>"
-        end
-      end
+      "#{number}<span>#{number.to_i == 1 ? "ier" : "e" }</span>"
     end
 
     # Formats date either as ordinal or by given date format
@@ -36,7 +31,7 @@ module Octopress
       if format.nil? || format.empty? || format == "ordinal"
         date_formatted = ordinalize(date)
       else
-        date_formatted = date.strftime(format)
+        date_formatted = l date.strftime(format)
         date_formatted.gsub!(/%o/, ordinal(date.strftime('%e').to_i))
       end
       date_formatted
@@ -46,8 +41,10 @@ module Octopress
     def liquid_date_attributes
       date_format = self.site.config['date_format']
       date_attributes = {}
-      date_attributes['date_formatted']    = format_date(self.data['date'], date_format)    if self.data.has_key?('date')
-      date_attributes['updated_formatted'] = format_date(self.data['updated'], date_format) if self.data.has_key?('updated')
+
+      date_attributes['date_formatted'] = l format_date(self.data['date'], date_format) if self.data.has_key?('date')
+      date_attributes['updated_formatted'] = l format_date(self.data['updated'], date_format) if self.data.has_key?('updated')
+
       date_attributes
     end
 

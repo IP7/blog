@@ -5,7 +5,7 @@ date: 2014-02-04 19:36:16 +0100
 author: Baptiste Fontaine
 comments: true
 published: false
-categories: 
+categories:
 - L3
 - M1
 - M2
@@ -42,7 +42,7 @@ L’utilisation des alias permet de réduire la commande précédente à celle-c
 Pour ce faire, il suffit d’éditer votre fichier `~/.ssh/config` (créez-le s’il
 n’existe pas). Pour `nivose`, ajoutez les lignes suivantes :
 
-```sshconfig
+```
 Host nivose ni
     Hostname nivose.informatique.univ-paris-diderot.fr
     User dupont
@@ -67,7 +67,7 @@ classic (22).
 Pour ajouter d’autres serveurs (comme `lucien`), utilisez la même syntaxe dans
 le fichier :
 
-```sshconfig
+```
 Host nivose ni
     Hostname nivose.informatique.univ-paris-diderot.fr
     User dupont
@@ -91,3 +91,4 @@ votre machine locale :
     ssh-copy-id -i ~/.ssh/id_rsa.pub nivose
 
 TODO
+
