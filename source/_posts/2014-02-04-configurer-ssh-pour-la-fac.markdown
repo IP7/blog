@@ -104,6 +104,20 @@ Exécutez la même commande pour chaque serveur. Votre mot de passe vous sera
 demandé, mais essayez ensuite de vous connecter avec `ssh`, et vous serez
 connecté directement sans avoir entré de mot de passe.
 
+Si vous n’avez pas `ssh-copy-id`, utilisez la commande suivante:
+
+    cat ~/.ssh/id_rsa.pub | ssh nivose 'cat >> ~/.ssh/authorized_keys'
+
+Cette ligne fait la même chose que `ssh-copy-id`, elle concatène votre clef
+publique dans le fichier `~/.ssh/authorized_keys` sur `nivose`. On notera la
+syntaxe au passage qui permet d’exécuter une commande sur le serveur sans
+ouvrir de session au préalable, par exemple :
+
+    ssh nivose ls
+
+Cette commande exécute `ls` sur `nivose` via SSH. C’est plus court que de se
+connecter, exécuter `ls` et se déconnecter.
+
 ## Tunnels SSH
 
 Il arrive parfois que le serveur qui permet d’accéder aux emplois du temps et
