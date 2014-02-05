@@ -83,7 +83,14 @@ IP à la place d’un nom de domaine. Vous pouvez maintenant utiliser un de vos
 alias à la place du nom du serveur.
 
 Pensez à utiliser un alias à chaque fois que vous devez utiliser régulièrement
-un long nom de domaine ou une IP fixe impossible à retenir.
+un long nom de domaine ou une IP fixe impossible à retenir. Notez aussi que
+cette astuce marche pour `scp`, vous pouvez maintenant faire la commande
+suivante pour copier un fichier de `nivose` en local :
+
+    scp ni:mon_fichier.c .
+
+Cette commande copie le fichier `~/mon_fichier.c` depuis `nivose` dans le
+répertoire courant.
 
 ## Éviter de taper son mot de passe
 
