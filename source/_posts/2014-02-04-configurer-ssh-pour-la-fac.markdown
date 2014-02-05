@@ -4,7 +4,6 @@ title: "Configurer SSH pour la fac"
 date: 2014-02-04 22:36:16 +0100
 author: Baptiste Fontaine
 comments: true
-published: false
 categories:
 - L3
 - M1
