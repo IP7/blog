@@ -34,11 +34,5 @@ indent_size = 4
 
 ; Override default indentation for some library files
 
-[jwplayer/glow/glow.xml]
-indent_style = tab
-
 [libs/jXHR.js]
-indent_style = tab
-
-[libs/swfobject-dynamic.js]
 indent_style = tab
